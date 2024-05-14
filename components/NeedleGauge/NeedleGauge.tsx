@@ -3,10 +3,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 
-const NeedleGauge = () => {
+type NeedleGaugeProps = {
+  gauge: number;
+};
+
+const defaultGauge: number = 50.5;
+
+const NeedleGauge = ({ gauge }: NeedleGaugeProps) => {
   const ref = useRef<any>(null);
-  var width = 1000;
-  var height = 600;
+  var width = 300;
+  var height = 300;
 
   var scale = d3.scaleLinear().domain([50, 80]).range([0, 180]);
 
@@ -68,7 +74,7 @@ const NeedleGauge = () => {
     var svg = d3.select(ref.current);
     svg
       .selectAll(".needle")
-      .data([50.5]) // 50.5(1) ~ 79.5(100)
+      .data([gauge ? gauge : defaultGauge]) // 50.5(1) ~ 79.5(100)
       // .transition()
       // // .ease(d3.easeElasticOut)
       // .duration(1000)
@@ -77,7 +83,7 @@ const NeedleGauge = () => {
       });
   }, []);
 
-  return <svg ref={ref}>NeedleGauge</svg>;
+  return <svg className="bg-gray-300" ref={ref}></svg>;
 };
 
 export default NeedleGauge;

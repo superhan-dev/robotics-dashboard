@@ -5,8 +5,8 @@ import * as d3 from "d3";
 
 const BarChart = () => {
   const ref = useRef<any>();
-  const width = 460;
-  const height = 400;
+  const width = 400;
+  const height = 350;
 
   useEffect(() => {
     const margin = {
